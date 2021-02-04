@@ -4,6 +4,5 @@ namespace ScoreSystem
 {
     public class ScoreUpdateEvent : UnityEvent<int>
     {
-        
     }
 }

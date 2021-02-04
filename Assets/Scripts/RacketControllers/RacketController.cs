@@ -6,12 +6,12 @@ namespace RacketControllers
     public abstract class RacketController : MonoBehaviour
     {
         [SerializeField] protected RectTransform moveContainer;
-        protected RectTransform Rect;
+
+        protected float MoveMax;
 
 
         protected float MoveMin;
-
-        protected float MoveMax;
+        protected RectTransform Rect;
 
         private void Start()
         {
@@ -23,8 +23,8 @@ namespace RacketControllers
             moveContainer = container;
             Rect = GetComponent<RectTransform>();
             var rect = moveContainer.rect;
-            MoveMin = rect.xMin + (Rect.rect.width / 2);
-            MoveMax = rect.xMax - (Rect.rect.width / 2);
+            MoveMin = rect.xMin + Rect.rect.width / 2;
+            MoveMax = rect.xMax - Rect.rect.width / 2;
         }
     }
 }

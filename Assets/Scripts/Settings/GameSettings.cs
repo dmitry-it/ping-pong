@@ -6,6 +6,10 @@ namespace Settings
     {
         private readonly ISettingsRepository _repository = new SettingsRepositoryPlayerPrefs();
 
+        private GameSettings()
+        {
+        }
+
         public static GameSettings Instance { get; } = new GameSettings();
 
         public bool IsCustomBallColorInUse
@@ -18,10 +22,6 @@ namespace Settings
         {
             get => _repository.LoadBallColor();
             set => _repository.SaveBallColor(value);
-        }
-
-        private GameSettings()
-        {
         }
     }
 }

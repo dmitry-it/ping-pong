@@ -4,7 +4,6 @@ namespace Popups
 {
     public class StartLevelPopup : Popup
     {
-      
         private GameBoard _gameBoard;
 
         public void SetGameBoard(GameBoard gameBoard)
@@ -18,7 +17,7 @@ namespace Popups
             _gameBoard.StartNewRound(GameMode.SinglePlayer);
             Close();
         }
-        
+
         public void OnTwoPlayersButtonClick()
         {
             Assert.IsNotNull(_gameBoard);

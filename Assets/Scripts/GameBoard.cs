@@ -4,7 +4,6 @@ using ScoreSystem;
 using TMPro;
 using UIElements;
 using UnityEngine;
-using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class GameBoard : MonoBehaviour
@@ -19,12 +18,20 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private int delayToStartRound = 3;
     [SerializeField] private TextMeshProUGUI maxScore;
     [SerializeField] private CounterUI scoreUi;
-    private GameMode _gameMode;
+
     private Ball _ball;
+    private GameMode _gameMode;
 
     private ScoreCounter _scoreCounter;
 
-    public UnityEvent roundEndEvent;
+    private const string StartLevelPopupName = "StartLevelPopup";
+    private const string SettingsPopupName = "SettingsPopup";
+    private const string BallPrefabsPath = "Prefabs/Balls";
+
+    private void Start()
+    {
+        OpenMenu();
+    }
 
     public void StartNewRound(GameMode mode)
     {
@@ -33,16 +40,9 @@ public class GameBoard : MonoBehaviour
         _ball.Punch(delayToStartRound);
     }
 
-    private void Start()
-    {
-        OpenMenu();
-    }
-
 
     private void LoadLevel()
     {
-        roundEndEvent = new UnityEvent();
-
         PrepareCounters();
 
         _ball = SpawnBall();
@@ -77,11 +77,8 @@ public class GameBoard : MonoBehaviour
 
     private Ball SpawnBall()
     {
-        foreach (var existBall in FindObjectsOfType<Ball>())
-        {
-            Destroy(existBall.gameObject);
-        }
-            
+        foreach (var existBall in FindObjectsOfType<Ball>()) Destroy(existBall.gameObject);
+
         var go = Instantiate(GetRandomBallPrefab(), gamePool, false);
         var ball = go.GetComponent<Ball>();
         ball.contactWithFinishZoneEvent.AddListener(FinishRound);
@@ -91,15 +88,11 @@ public class GameBoard : MonoBehaviour
 
     private Racket SpawnRacket(Transform parentTransform)
     {
-        foreach (var racket in parentTransform.GetComponentsInChildren<Racket>())
-        {
-            Destroy(racket.gameObject);
-        }
+        foreach (var racket in parentTransform.GetComponentsInChildren<Racket>()) Destroy(racket.gameObject);
 
         var go = Instantiate(racketPrefab, parentTransform, false);
         return go.GetComponent<Racket>();
     }
-
 
     private void FinishRound()
     {
@@ -109,21 +102,18 @@ public class GameBoard : MonoBehaviour
 
     public void OpenMenu()
     {
-        popupFabric.OpenPopup<StartLevelPopup>("StartLevelPopup", popup => { popup.SetGameBoard(this); });
+        popupFabric.OpenPopup<StartLevelPopup>(StartLevelPopupName, popup => { popup.SetGameBoard(this); });
     }
 
     public void OpenSettings()
     {
-        popupFabric.OpenPopup<SettingsPopup>("SettingsPopup",
-            popup =>
-            {
-                popup.OnCloseEvent.AddListener(() => StartNewRound(_gameMode));
-            });
+        popupFabric.OpenPopup<SettingsPopup>(SettingsPopupName,
+            popup => { popup.OnCloseEvent.AddListener(() => StartNewRound(_gameMode)); });
     }
 
     private GameObject GetRandomBallPrefab()
     {
-        var prefabs = Resources.LoadAll<GameObject>("Prefabs/Balls");
+        var prefabs = Resources.LoadAll<GameObject>(BallPrefabsPath);
         var prefabsCount = prefabs.Length;
         return prefabsCount > 1 ? prefabs[Random.Range(0, prefabsCount - 1)] : ballPrefab;
     }

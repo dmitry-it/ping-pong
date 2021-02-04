@@ -27,8 +27,9 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        image.color = GameSettings.Instance.IsCustomBallColorInUse 
-            ? GameSettings.Instance.CustomBallColor : color;
+        image.color = GameSettings.Instance.IsCustomBallColorInUse
+            ? GameSettings.Instance.CustomBallColor
+            : color;
 
         gameObject.GetComponent<RectTransform>()
             .SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
@@ -36,8 +37,26 @@ public class Ball : MonoBehaviour
             .SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
     }
 
+    private void Update()
+    {
+        transform.position += _force * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        var contactPoint2D = other.contacts.FirstOrDefault();
+        _force = Vector3.Reflect(_force, contactPoint2D.normal);
+        var countable = other.gameObject.GetComponent<CountableSurface>();
+        if (countable != null) CountableSurfacesContactEvent.Invoke(countable.AmountOfPoints);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.GetComponent<FinishRoundZone>() != null) contactWithFinishZoneEvent.Invoke();
+    }
+
     /// <summary>
-    /// Start ball sliding
+    ///     Start ball sliding
     /// </summary>
     public void Punch(int startDelay)
     {
@@ -49,35 +68,11 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(startDelay);
         GenerateForce();
     }
-        
-    private void Update()
-    {
-        transform.position += _force * Time.deltaTime;
-    }
 
     private void GenerateForce()
     {
         var direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         direction /= direction.magnitude;
-        _force = direction  * speed;
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        var contactPoint2D = other.contacts.FirstOrDefault();
-        _force = Vector3.Reflect(_force, contactPoint2D.normal);
-        var countable = other.gameObject.GetComponent<CountableSurface>();
-        if (countable != null)
-        {
-            CountableSurfacesContactEvent.Invoke(countable.AmountOfPoints);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.GetComponent<FinishRoundZone>() != null)
-        {
-            contactWithFinishZoneEvent.Invoke();
-        }
+        _force = direction * speed;
     }
 }

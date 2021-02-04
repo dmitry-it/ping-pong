@@ -1,13 +1,12 @@
 using RacketControllers;
 using UnityEngine;
-using UnityEngine;
 
 public class Racket : MonoBehaviour
 {
     private RacketController _moveDragController;
 
     /// <summary>
-    /// Use for Init racket with manual control
+    ///     Use for Init racket with manual control
     /// </summary>
     public void InitAsPlayerRacket()
     {
@@ -16,7 +15,7 @@ public class Racket : MonoBehaviour
     }
 
     /// <summary>
-    /// Use to repeat movement of another racket
+    ///     Use to repeat movement of another racket
     /// </summary>
     /// <param name="transformToSync">Racket for mirroring</param>
     public void InitAsSyncedRacket(Transform transformToSync)

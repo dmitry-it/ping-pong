@@ -6,14 +6,14 @@ namespace Settings
     {
         public void SaveBallColor(Color colorHex)
         {
-            PlayerPrefs.SetString("ball_color", "#"+ColorUtility.ToHtmlStringRGBA(colorHex));
-           
+            PlayerPrefs.SetString("ball_color", "#" + ColorUtility.ToHtmlStringRGBA(colorHex));
         }
 
         public Color LoadBallColor()
         {
-            return ColorUtility.TryParseHtmlString(PlayerPrefs.GetString("ball_color"), out var color) 
-                ? color : Color.white;
+            return ColorUtility.TryParseHtmlString(PlayerPrefs.GetString("ball_color"), out var color)
+                ? color
+                : Color.white;
         }
 
         public void UseCustomColor(bool enabled)

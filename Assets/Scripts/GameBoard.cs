@@ -1,13 +1,9 @@
 ﻿using System;
-using System;
 using Popups;
 using ScoreSystem;
 using TMPro;
-using TMPro;
 using UIElements;
 using UnityEngine;
-using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
@@ -28,7 +24,7 @@ public class GameBoard : MonoBehaviour
 
     private ScoreCounter _scoreCounter;
 
-    public UnityEvent onRoundEndEvent;
+    public UnityEvent roundEndEvent;
 
     public void StartNewRound(GameMode mode)
     {
@@ -45,7 +41,7 @@ public class GameBoard : MonoBehaviour
 
     private void LoadLevel()
     {
-        onRoundEndEvent = new UnityEvent();
+        roundEndEvent = new UnityEvent();
 
         PrepareCounters();
 
@@ -88,7 +84,7 @@ public class GameBoard : MonoBehaviour
             
         var go = Instantiate(GetRandomBallPrefab(), gamePool, false);
         var ball = go.GetComponent<Ball>();
-        ball.onContactWithFinishZone.AddListener(FinishRound);
+        ball.contactWithFinishZoneEvent.AddListener(FinishRound);
         ball.CountableSurfacesContactEvent.AddListener(_scoreCounter.AddPointsToScore);
         return ball;
     }

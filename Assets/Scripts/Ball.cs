@@ -1,15 +1,9 @@
 using System.Collections;
-using System.Collections;
-using System.Linq;
 using System.Linq;
 using Settings;
 using UnityEngine;
-using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
-using UnityEngine.Events;
-using UnityEngine.UI;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
@@ -20,8 +14,8 @@ public class Ball : MonoBehaviour
     [SerializeField] private float size;
     [SerializeField] private Color color;
     [SerializeField] private float speed = 1f;
-    public UnityEvent onContactWithFinishZone = new UnityEvent();
-    public CountableSurfacesContactEvent CountableSurfacesContactEvent = new CountableSurfacesContactEvent();
+    public UnityEvent contactWithFinishZoneEvent = new UnityEvent();
+    public readonly CountableSurfacesContactEvent CountableSurfacesContactEvent = new CountableSurfacesContactEvent();
     private Vector3 _force = Vector3.zero;
 
     private void Awake()
@@ -83,7 +77,7 @@ public class Ball : MonoBehaviour
     {
         if (collider.gameObject.GetComponent<FinishRoundZone>() != null)
         {
-            onContactWithFinishZone.Invoke();
+            contactWithFinishZoneEvent.Invoke();
         }
     }
 }

@@ -1,11 +1,9 @@
 using UnityEngine;
+using UnityEngine;
 
-namespace Assets.Scripts
+public class CountableSurface : MonoBehaviour
 {
-    public class CountableSurface : MonoBehaviour
-    {
-        public int AmountOfPoints => _amountOfPoints;
+    public int AmountOfPoints => amountOfPoints;
 
-        [SerializeField] private int _amountOfPoints = 1;
-    }
+    [SerializeField] private int amountOfPoints = 1;
 }

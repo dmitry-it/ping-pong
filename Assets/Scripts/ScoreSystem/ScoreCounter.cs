@@ -1,14 +1,12 @@
-using UnityEngine;
-
-namespace Assets.Scripts.ScoreSystem
+namespace ScoreSystem
 {
     public class ScoreCounter
     {
         public int CurrentScore => _score;
         public int MaxScore => _repository.LoadBestScore();
         private int _score = 0;
-        private IScoreRepository _repository;
-        public ScoreUpdateEvent OnScoreUpdateEvent = new ScoreUpdateEvent();
+        private readonly IScoreRepository _repository;
+        public readonly ScoreUpdateEvent ScoreUpdateEvent = new ScoreUpdateEvent();
 
         public ScoreCounter(IScoreRepository repository)
         {
@@ -18,7 +16,7 @@ namespace Assets.Scripts.ScoreSystem
         public void AddPointsToScore(int points)
         {
             _score += points;
-            OnScoreUpdateEvent.Invoke(_score);
+            ScoreUpdateEvent.Invoke(_score);
             
         }
 

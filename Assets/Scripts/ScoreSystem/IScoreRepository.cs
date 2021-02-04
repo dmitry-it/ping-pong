@@ -1,4 +1,4 @@
-namespace Assets.Scripts.ScoreSystem
+namespace ScoreSystem
 {
     public interface IScoreRepository
     {

@@ -1,10 +1,6 @@
-namespace Assets.Scripts
+public enum GameMode
 {
-    public enum GameMode
-    {
-        SinglePlayer,
-        TwoPlayerOnDevice,
-        NetworkGame
-    }
-    
+    SinglePlayer,
+    TwoPlayerOnDevice,
+    NetworkGame
 }

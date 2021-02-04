@@ -1,8 +1,8 @@
-using Assets.Scripts.Settings;
+using Settings;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Popups
+namespace Popups
 {
     public class SettingsPopup : Popup
     {

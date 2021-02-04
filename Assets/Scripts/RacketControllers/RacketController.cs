@@ -1,29 +1,30 @@
 using UnityEngine;
 
-namespace Assets.Scripts.RacketControllers
+namespace RacketControllers
 {
     [RequireComponent(typeof(RectTransform))]
     public abstract class RacketController : MonoBehaviour
     {
         [SerializeField] protected RectTransform moveContainer;
-        protected RectTransform rect;
+        protected RectTransform Rect;
 
 
-        protected float moveMin;
+        protected float MoveMin;
 
-        protected float moveMax;
+        protected float MoveMax;
 
         private void Start()
         {
-            rect = gameObject.GetComponent<RectTransform>();
+            Rect = gameObject.GetComponent<RectTransform>();
         }
 
         public void InitInContainer(RectTransform container)
         {
             moveContainer = container;
-            rect = GetComponent<RectTransform>();
-            moveMin = moveContainer.rect.xMin + (rect.rect.width / 2);
-            moveMax = moveContainer.rect.xMax - (rect.rect.width / 2);
+            Rect = GetComponent<RectTransform>();
+            var rect = moveContainer.rect;
+            MoveMin = rect.xMin + (Rect.rect.width / 2);
+            MoveMax = rect.xMax - (Rect.rect.width / 2);
         }
     }
 }

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.UIElements
+namespace UIElements
 {
     public class CounterUI : MonoBehaviour
     {

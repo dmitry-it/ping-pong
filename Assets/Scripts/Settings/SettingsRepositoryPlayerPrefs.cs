@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Settings
+namespace Settings
 {
     public class SettingsRepositoryPlayerPrefs : ISettingsRepository
     {
@@ -21,6 +21,6 @@ namespace Assets.Scripts.Settings
             PlayerPrefs.SetInt("use_custom_ball", enabled ? 1 : -1);
         }
 
-        public bool isCustomColorInUse => PlayerPrefs.GetInt("use_custom_ball") > 0;
+        public bool IsCustomColorInUse => PlayerPrefs.GetInt("use_custom_ball") > 0;
     }
 }

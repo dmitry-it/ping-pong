@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.ScoreSystem
+namespace ScoreSystem
 {
     public class ScoreRepositoryToPlayerPrefs : IScoreRepository
     {

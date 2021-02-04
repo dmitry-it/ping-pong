@@ -1,6 +1,6 @@
 using UnityEngine.Assertions;
 
-namespace Assets.Scripts.Popups
+namespace Popups
 {
     public class StartLevelPopup : Popup
     {

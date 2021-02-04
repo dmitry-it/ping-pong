@@ -1,9 +1,7 @@
 using UnityEngine.Events;
+using UnityEngine.Events;
 
-namespace Assets.Scripts
+public class CountableSurfacesContactEvent : UnityEvent<int>
 {
-    public class CountableSurfacesContactEvent : UnityEvent<int>
-    {
         
-    }
 }

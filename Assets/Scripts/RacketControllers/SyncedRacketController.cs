@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace Assets.Scripts.RacketControllers
+namespace RacketControllers
 {
     public class SyncedRacketController : RacketController
     {
-        private Transform syncedObjectTransform;
+        private Transform _syncedObjectTransform;
 
         public void SyncWithOtherTransform(Transform transform)
         {
-            syncedObjectTransform = transform;
+            _syncedObjectTransform = transform;
         }
         
         private void Update()
@@ -19,20 +19,22 @@ namespace Assets.Scripts.RacketControllers
         private void SetNormalizedPosition()
         {
             
-            var xCoordinate = syncedObjectTransform == null ? 0f : syncedObjectTransform.position.x;
+            var xCoordinate = _syncedObjectTransform == null ? 0f : _syncedObjectTransform.position.x;
             
-            if (xCoordinate < moveMin)
+            if (xCoordinate < MoveMin)
             {
-                xCoordinate = moveMin;
+                xCoordinate = MoveMin;
               
             }
-            else if (xCoordinate > moveMax)
+            else if (xCoordinate > MoveMax)
             {
-                xCoordinate = moveMax;
+                xCoordinate = MoveMax;
             
             }
 
-            rect.position = new Vector3(xCoordinate, rect.position.y, rect.position.z);
+            var position = Rect.position;
+            position = new Vector3(xCoordinate, position.y, position.z);
+            Rect.position = position;
         }
         
     }

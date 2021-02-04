@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts.RacketControllers
+namespace RacketControllers
 {
     public class RacketDragController : RacketController, IDragHandler
     {
@@ -19,18 +19,18 @@ namespace Assets.Scripts.RacketControllers
             {
                 var xCoordinate = globalMousePos.x;
             
-                if (xCoordinate < moveMin)
+                if (xCoordinate < MoveMin)
                 {
-                    xCoordinate = moveMin;
+                    xCoordinate = MoveMin;
               
                 }
-                else if (xCoordinate > moveMax)
+                else if (xCoordinate > MoveMax)
                 {
-                    xCoordinate = moveMax;
+                    xCoordinate = MoveMax;
             
                 }
 
-                rect.localPosition = new Vector3(xCoordinate, rect.position.y, rect.position.z);
+                Rect.localPosition = new Vector3(xCoordinate, Rect.position.y, Rect.position.z);
             }
         }
     }

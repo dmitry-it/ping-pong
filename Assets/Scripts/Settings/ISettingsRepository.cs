@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Settings
+namespace Settings
 {
     public interface ISettingsRepository
     {
@@ -9,6 +9,6 @@ namespace Assets.Scripts.Settings
 
         void UseCustomColor(bool enabled);
 
-        bool isCustomColorInUse { get;  }
+        bool IsCustomColorInUse { get;  }
     }
 }

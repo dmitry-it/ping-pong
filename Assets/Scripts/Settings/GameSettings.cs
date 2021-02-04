@@ -1,16 +1,16 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Settings
+namespace Settings
 {
     public sealed class GameSettings
     {
-        private ISettingsRepository _repository = new SettingsRepositoryPlayerPrefs();
+        private readonly ISettingsRepository _repository = new SettingsRepositoryPlayerPrefs();
 
         public static GameSettings Instance { get; } = new GameSettings();
 
         public bool IsCustomBallColorInUse
         {
-            get => _repository.isCustomColorInUse;
+            get => _repository.IsCustomColorInUse;
             set => _repository.UseCustomColor(value);
         }
 

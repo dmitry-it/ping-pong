@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Assets.Scripts.Popups
+namespace Popups
 {
     public abstract class Popup : MonoBehaviour
     {
